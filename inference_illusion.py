@@ -276,7 +276,7 @@ def main():
             condition2=None if not cond_gen else condition2,
             unconditional_condition2=None if not cond_gen else unconditional_condition2,
         )
-        dpm_solver = DPM_Solver_illusion(model_fn, noise_schedule, algorithm_type='dpmsolver++', w_id=args.w_id, w_rotated=args.w_rotated)
+        dpm_solver = DPM_Solver_illusion(model_fn, noise_schedule, algorithm_type='dpmsolver++', w_id=args.w_id, w_rotated=args.w_rotated, rot_angle=args.rotation_angle)
 
         with torch.no_grad():
             noise = torch.randn(sample_shape, device=dist_util.dev()) * args.temperature
