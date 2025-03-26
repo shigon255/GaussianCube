@@ -165,10 +165,10 @@ def rotate_around_z_0_deg(x, clockwise=False):
     return x
 
 rot_fn_dict = {
-    0: rotate_around_z_0_deg,
-    90: rotate_around_z_90_deg,
-    180: rotate_around_z_180_deg,
-    270: rotate_around_z_270_deg
+    '0': rotate_around_z_0_deg,
+    '90': rotate_around_z_90_deg,
+    '180': rotate_around_z_180_deg,
+    '270': rotate_around_z_270_deg
 }
 
 def model_wrapper_illusion(
@@ -430,9 +430,9 @@ class DPM_Solver_illusion:
             Burcu Karagol Ayan, S Sara Mahdavi, Rapha Gontijo Lopes, et al. Photorealistic text-to-image diffusion models
             with deep language understanding. arXiv preprint arXiv:2205.11487, 2022b.
         """
-        if rot_angle not in rot_fn_dict:
+        if str(rot_angle) not in rot_fn_dict:
             raise ValueError(f"Unsupported rotation angle {rot_angle}.")
-        rot_fn = rot_fn_dict[rot_angle]
+        rot_fn = rot_fn_dict[str(rot_angle)]
         def custom_model_fn(x, t):
             rotated_x = rot_fn(x, clockwise=True)
             noise_id_uncond, noise_id, guidance_scale = model_fn(x, t.expand((x.shape[0])))
